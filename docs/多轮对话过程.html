@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI助教答疑平台多轮对话过程</title>
+    <style>
+        :root {
+            --ink: #172033;
+            --muted: #667085;
+            --line: #d8e0ea;
+            --blue: #2563eb;
+            --teal: #0f766e;
+            --paper: #ffffff;
+            --canvas: #eef3f8;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 36px;
+            color: var(--ink);
+            background: var(--canvas);
+            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+        }
+        main {
+            width: min(980px, 100%);
+            margin: 0 auto;
+            padding: 36px;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: var(--paper);
+        }
+        h1 { margin: 0; font-size: 30px; }
+        .subtitle { margin: 7px 0 28px; color: var(--muted); }
+        .timeline { display: grid; gap: 12px; }
+        article {
+            display: grid;
+            grid-template-columns: 92px 1fr 1fr;
+            gap: 14px;
+            padding: 16px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fbfcfe;
+        }
+        .round {
+            color: var(--blue);
+            font-weight: 800;
+        }
+        .request, .result {
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .request strong, .result strong {
+            display: block;
+            margin-bottom: 3px;
+            color: #344054;
+            font-size: 11px;
+        }
+        .result { color: #075e56; }
+        footer {
+            margin-top: 24px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 12px;
+        }
+        @media (max-width: 720px) {
+            body { padding: 16px; }
+            main { padding: 22px; }
+            article { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>AI助教答疑平台：多轮对话过程</h1>
+        <p class="subtitle">记录从需求拆解到浏览器验证的七轮沟通要点，作为课后任务的过程性材料。</p>
+
+        <section class="timeline" aria-label="多轮对话记录">
+            <article>
+                <span class="round">第 1 轮</span>
+                <p class="request"><strong>需求</strong>拆解注册、登录、表单增强、多轮截图和 Gitee 推送要求。</p>
+                <p class="result"><strong>结果</strong>确定项目需包含三个页面、共享样式脚本、说明文档与独立 Git 仓库。</p>
+            </article>
+            <article>
+                <span class="round">第 2 轮</span>
+                <p class="request"><strong>需求</strong>确定与参考图一致的视觉方向。</p>
+                <p class="result"><strong>结果</strong>采用浅色课程工具界面、蓝色主操作、青绿色状态反馈。</p>
+            </article>
+            <article>
+                <span class="round">第 3 轮</span>
+                <p class="request"><strong>需求</strong>实现个性化注册。</p>
+                <p class="result"><strong>结果</strong>加入身份、学院、兴趣、头像、密码强度与协议确认。</p>
+            </article>
+            <article>
+                <span class="round">第 4 轮</span>
+                <p class="request"><strong>需求</strong>实现登录和账号状态流转。</p>
+                <p class="result"><strong>结果</strong>支持用户名或邮箱登录、记住账号、显示密码与登录态跳转。</p>
+            </article>
+            <article>
+                <span class="round">第 5 轮</span>
+                <p class="request"><strong>需求</strong>还原截图中的答疑主界面。</p>
+                <p class="result"><strong>结果</strong>实现居中标题、副标题、输入框、蓝色提问按钮和对话区域。</p>
+            </article>
+            <article>
+                <span class="round">第 6 轮</span>
+                <p class="request"><strong>需求</strong>实现多轮追问，并明确 AI 接口将在第 9 周接入。</p>
+                <p class="result"><strong>结果</strong>增加连续消息、示例问题、附件名称、清空记录和演示回答。</p>
+            </article>
+            <article>
+                <span class="round">第 7 轮</span>
+                <p class="request"><strong>需求</strong>完成实际渲染和布局检查。</p>
+                <p class="result"><strong>结果</strong>生成桌面与移动端截图，检查文本溢出、表单换行和主要交互。</p>
+            </article>
+        </section>
+
+        <footer>说明：本文档用于展示多轮对话和迭代结果，页面截图见同目录 screenshots 文件夹。</footer>
+    </main>
+</body>
+</html>

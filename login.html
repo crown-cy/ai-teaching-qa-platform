@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI助教答疑平台登录页面">
+    <title>登录 | AI助教答疑平台</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <main class="auth-page">
+        <div class="auth-shell">
+            <section class="auth-intro" aria-labelledby="introTitle">
+                <div>
+                    <a class="brand-lockup" href="index.html">
+                        <span class="brand-mark" aria-hidden="true">AI</span>
+                        <span class="brand-name">
+                            <strong>AI助教答疑平台</strong>
+                            <span>课程学习支持中心</span>
+                        </span>
+                    </a>
+
+                    <h1 id="introTitle">把问题留在课程里，把思路带回学习中。</h1>
+                    <p class="lead">登录后可以连续追问、保留学习记录，并按课程进入对应的答疑空间。</p>
+
+                    <ul class="feature-list" aria-label="平台能力">
+                        <li><span class="feature-index">01</span><span>多轮追问与问题上下文保留</span></li>
+                        <li><span class="feature-index">02</span><span>学生与教师身份个性化入口</span></li>
+                        <li><span class="feature-index">03</span><span>HTML5 原生表单校验与即时反馈</span></li>
+                    </ul>
+                </div>
+                <p class="intro-note">当前版本为第 1 至 8 周演示版，AI 接口将在第 9 周接入。</p>
+            </section>
+
+            <section class="auth-card" aria-labelledby="loginTitle">
+                <header class="auth-card-header">
+                    <p class="eyebrow">Welcome back</p>
+                    <h2 id="loginTitle">登录答疑平台</h2>
+                    <p class="subtitle">使用注册时的用户名或邮箱继续学习。</p>
+                </header>
+
+                <form id="loginForm" method="post" action="#" aria-describedby="loginHelp">
+                    <div class="field">
+                        <label for="account">账号或邮箱 <span class="required" aria-hidden="true">*</span></label>
+                        <input
+                            class="control"
+                            id="account"
+                            name="account"
+                            type="text"
+                            required
+                            minlength="4"
+                            maxlength="64"
+                            pattern="[A-Za-z0-9_@.\-]{4,64}"
+                            autocomplete="username"
+                            inputmode="email"
+                            autocapitalize="none"
+                            spellcheck="false"
+                            placeholder="请输入用户名或邮箱"
+                            aria-describedby="accountHint"
+                            autofocus
+                        >
+                        <p class="field-hint" id="accountHint">用户名支持字母、数字和下划线。</p>
+                    </div>
+
+                    <div class="field">
+                        <label for="password">密码 <span class="required" aria-hidden="true">*</span></label>
+                        <div class="password-field">
+                            <input
+                                class="control"
+                                id="password"
+                                name="password"
+                                type="password"
+                                required
+                                minlength="8"
+                                maxlength="64"
+                                autocomplete="current-password"
+                                placeholder="请输入至少 8 位密码"
+                                aria-describedby="passwordHint"
+                            >
+                            <button class="password-toggle" id="passwordToggle" type="button" aria-pressed="false">显示</button>
+                        </div>
+                        <p class="field-hint" id="passwordHint">密码区分大小写。</p>
+                    </div>
+
+                    <div class="inline-options">
+                        <label class="check-line" for="remember">
+                            <input id="remember" name="remember" type="checkbox">
+                            <span>记住我的账号</span>
+                        </label>
+                        <a href="#" aria-label="忘记密码暂时不可用">忘记密码？</a>
+                    </div>
+
+                    <button class="button button--primary button--wide" id="loginButton" type="submit">登录并开始答疑</button>
+                </form>
+
+                <p class="auth-switch" id="loginHelp">还没有账号？<a href="register.html">创建个人学习账号</a></p>
+                <p class="demo-note">首次体验：用户名 <strong>demo</strong>，密码 <strong>Demo@123</strong>。</p>
+            </section>
+        </div>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="assets/js/auth.js"></script>
+    <script>
+        (function () {
+            "use strict";
+
+            var form = document.getElementById("loginForm");
+            var account = document.getElementById("account");
+            var password = document.getElementById("password");
+            var remember = document.getElementById("remember");
+            var loginButton = document.getElementById("loginButton");
+            var rememberedAccount = localStorage.getItem("ai_platform_remembered_account");
+
+            if (rememberedAccount) {
+                account.value = rememberedAccount;
+                remember.checked = true;
+            }
+
+            AIPlatform.togglePassword(document.getElementById("passwordToggle"), password);
+
+            function validateAccount() {
+                if (account.validity.valueMissing) {
+                    AIPlatform.setHint(account, "accountHint", "请输入用户名或邮箱。", "error");
+                    return false;
+                }
+                if (account.validity.patternMismatch || account.validity.tooShort) {
+                    AIPlatform.setHint(account, "accountHint", "账号格式不正确，请检查输入内容。", "error");
+                    return false;
+                }
+                AIPlatform.setHint(account, "accountHint", "账号格式正确。", "success");
+                return true;
+            }
+
+            function validatePassword() {
+                if (password.validity.valueMissing) {
+                    AIPlatform.setHint(password, "passwordHint", "请输入密码。", "error");
+                    return false;
+                }
+                if (password.validity.tooShort) {
+                    AIPlatform.setHint(password, "passwordHint", "密码至少需要 8 位。", "error");
+                    return false;
+                }
+                AIPlatform.setHint(password, "passwordHint", "密码长度符合要求。", "success");
+                return true;
+            }
+
+            account.addEventListener("input", function () {
+                if (account.value) {
+                    validateAccount();
+                } else {
+                    AIPlatform.setHint(account, "accountHint", "用户名支持字母、数字和下划线。");
+                }
+            });
+
+            password.addEventListener("input", function () {
+                if (password.value) {
+                    validatePassword();
+                } else {
+                    AIPlatform.setHint(password, "passwordHint", "密码区分大小写。");
+                }
+            });
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                var accountValid = validateAccount();
+                var passwordValid = validatePassword();
+
+                if (!accountValid || !passwordValid) {
+                    form.reportValidity();
+                    AIPlatform.showToast("请先修正表单中的错误", "error");
+                    return;
+                }
+
+                loginButton.disabled = true;
+                loginButton.textContent = "正在验证...";
+
+                AIPlatform.login(account.value, password.value).then(function (result) {
+                    if (!result.ok) {
+                        loginButton.disabled = false;
+                        loginButton.textContent = "登录并开始答疑";
+                        AIPlatform.setHint(password, "passwordHint", "账号或密码不匹配。", "error");
+                        AIPlatform.showToast("登录失败，请检查账号和密码", "error");
+                        return;
+                    }
+
+                    if (remember.checked) {
+                        localStorage.setItem("ai_platform_remembered_account", account.value.trim());
+                    } else {
+                        localStorage.removeItem("ai_platform_remembered_account");
+                    }
+
+                    AIPlatform.showToast("登录成功，正在进入答疑平台", "success");
+                    window.setTimeout(function () {
+                        window.location.href = "app.html";
+                    }, 650);
+                }).catch(function () {
+                    loginButton.disabled = false;
+                    loginButton.textContent = "登录并开始答疑";
+                    AIPlatform.showToast("登录过程出现异常，请重试", "error");
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

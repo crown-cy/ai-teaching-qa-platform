@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI助教答疑平台答疑工作台">
+    <title>答疑工作台 | AI助教答疑平台</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="app-page">
+    <header class="app-header">
+        <div class="app-header-inner">
+            <a class="app-brand" href="app.html">
+                <span class="brand-mark" aria-hidden="true">AI</span>
+                <span class="app-brand-copy">
+                    <strong>AI助教答疑平台</strong>
+                    <span>课程学习支持中心</span>
+                </span>
+            </a>
+
+            <div class="header-actions">
+                <span class="user-pill" id="userPill">正在读取学习身份...</span>
+                <button class="button button--secondary" id="logoutButton" type="button">退出</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-layout">
+        <aside class="sidebar" aria-labelledby="courseTitle">
+            <h2 id="courseTitle">课程空间</h2>
+            <ul class="course-list">
+                <li><button class="course-button active" type="button" data-course="Web前端开发">Web 前端开发</button></li>
+                <li><button class="course-button" type="button" data-course="程序设计基础">程序设计基础</button></li>
+                <li><button class="course-button" type="button" data-course="数据库原理">数据库原理</button></li>
+                <li><button class="course-button" type="button" data-course="计算机网络">计算机网络</button></li>
+            </ul>
+            <p class="sidebar-tip">切换课程后，提问会自动带上当前课程名称。</p>
+        </aside>
+
+        <section class="workspace" aria-labelledby="pageTitle">
+            <header class="workspace-header">
+                <h1 id="pageTitle">AI助教答疑平台</h1>
+                <p>智能答疑 · 随时提问 · 连续追问</p>
+                <span class="status-strip"><span class="status-dot" aria-hidden="true"></span>演示模式：AI 接口将在第 9 周接入</span>
+            </header>
+
+            <div class="workspace-body">
+                <div class="conversation" id="conversation" role="log" aria-live="polite" aria-label="答疑对话记录"></div>
+
+                <div class="empty-state" id="emptyState">
+                    <p>当前交流仅保存在本机浏览器中。可以输入问题，也可以从下面的示例开始。</p>
+                </div>
+
+                <div class="suggestion-row" id="suggestionRow" aria-label="示例问题">
+                    <button class="suggestion" type="button" data-question="HTML5 表单增强有哪些常用能力？">HTML5 表单增强有哪些常用能力？</button>
+                    <button class="suggestion" type="button" data-question="JavaScript 中 let 和 const 有什么区别？">let 和 const 有什么区别？</button>
+                    <button class="suggestion" type="button" data-question="数据库第三范式应该如何理解？">数据库第三范式怎么理解？</button>
+                </div>
+
+                <form class="composer" id="questionForm" method="post" action="#">
+                    <div class="composer-row">
+                        <label class="sr-only" for="questionInput">输入课程问题</label>
+                        <textarea
+                            id="questionInput"
+                            name="question"
+                            required
+                            minlength="2"
+                            maxlength="500"
+                            rows="2"
+                            enterkeyhint="send"
+                            placeholder="请输入你的问题，例如：HTML5 表单增强有哪些常用能力？"
+                            aria-describedby="questionCount"
+                        ></textarea>
+                        <button class="button button--primary send-button" id="sendButton" type="submit">提问</button>
+                    </div>
+
+                    <div class="composer-meta">
+                        <div class="composer-tools">
+                            <label for="questionFile">附上参考文件：</label>
+                            <input id="questionFile" name="questionFile" type="file" accept=".txt,.md,.html,.css,.js,.png,.jpg,.jpeg,.webp">
+                            <button class="button button--secondary" id="clearButton" type="button">清空记录</button>
+                        </div>
+                        <output class="composer-count" id="questionCount" for="questionInput">0 / 500</output>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
